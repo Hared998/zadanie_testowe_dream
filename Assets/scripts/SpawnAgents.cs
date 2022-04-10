@@ -29,7 +29,11 @@ public class SpawnAgents : MonoBehaviour
     {
         Vector3 boardWidth = mapManager.GetWidth() + offset;
 
-        ChooseCoordsToSpawn(boardWidth);
+
+        GameObject _agent = Instantiate(agent, transform.position, Quaternion.identity);
+
+        _agent.transform.position = ChooseCoordsToSpawn(boardWidth);
+        
     }
 
     // Update is called once per frame
@@ -38,8 +42,9 @@ public class SpawnAgents : MonoBehaviour
         
     }
 
-    private Vector3 ChooseCoordsToSpawn(Vector3 boardWidth)
+    public Vector3 ChooseCoordsToSpawn(Vector3 boardWidth)
     { 
-        return new Vector3(Random.Range(-boardWidth.x / 2, boardWidth.x / 2), offsetHeight, Random.Range(-boardWidth.z / 2, boardWidth.z / 2)); 
+        Vector3 coords = new Vector3(Random.Range(-boardWidth.x / 2, boardWidth.x / 2), offsetHeight, Random.Range(-boardWidth.z / 2, boardWidth.z / 2));
+        return transform.position + coords;
     }
 }
