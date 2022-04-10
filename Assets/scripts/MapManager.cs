@@ -26,6 +26,7 @@ public class MapManager : MonoBehaviour
 
 
     //Zmienne obs³guj¹ce mape
+    public Vector3 offset = new Vector3(1, 0, 1);
 
     private List<GameObject> walls;
 
@@ -33,14 +34,15 @@ public class MapManager : MonoBehaviour
 
     private SpawnAgents spawnAgents;
 
-    void Start()
+
+    private void Awake()
     {
         spawnAgents = gameObject.GetComponent<SpawnAgents>();
-
         corners = new List<Corner>();
-
+    }
+    void Start()
+    {
         SetWallsAroundBoard();
-
     }
 
     // Update is called once per frame
@@ -67,10 +69,9 @@ public class MapManager : MonoBehaviour
     }
     public void SetWallsAroundBoard()
     {
-        MeshCollider boardMesh = gameObject.GetComponent<MeshCollider>();
-        float HorizontalWidth = boardMesh.bounds.size.z;
-        float VerticalWidth = boardMesh.bounds.size.x;
-        GetCorners(HorizontalWidth, VerticalWidth);
+
+        Vector3 boardWidth = GetWidth() + offset;
+        GetCorners(boardWidth.z, boardWidth.x);
         foreach (var CornerPosition in corners)
         {
             Debug.Log(CornerPosition.direction);
@@ -89,5 +90,10 @@ public class MapManager : MonoBehaviour
         corner = new Corner(transform.position - new Vector3(0, 0, Horizontal / 2), Directions.vertical, Vertical);
         corners.Add(corner);
 
+    }
+    public Vector3 GetWidth()
+    {
+        MeshCollider boardMesh = gameObject.GetComponent<MeshCollider>();
+        return new Vector3(boardMesh.bounds.size.x, 0,boardMesh.bounds.size.z);
     }
 }
