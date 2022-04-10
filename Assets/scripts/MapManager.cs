@@ -26,7 +26,7 @@ public class MapManager : MonoBehaviour
 
 
     //Zmienne obs³guj¹ce mape
-    public Vector3 offset = new Vector3(1, 0, 1);
+    public Vector3 offset = new Vector3(1, 0.5f, 1);
 
     private List<GameObject> walls;
 
@@ -43,6 +43,7 @@ public class MapManager : MonoBehaviour
     void Start()
     {
         SetWallsAroundBoard();
+        spawnAgents.StartSpawning();
     }
 
     // Update is called once per frame
@@ -74,7 +75,7 @@ public class MapManager : MonoBehaviour
         GetCorners(boardWidth.z, boardWidth.x);
         foreach (var CornerPosition in corners)
         {
-            Debug.Log(CornerPosition.direction);
+           
             CreateWall(CornerPosition.position, CornerPosition.radius, CornerPosition.direction);
         }   
 
