@@ -56,7 +56,7 @@ public class MapManager : MonoBehaviour
         GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         cube.transform.position = startPosition;
         cube.transform.SetParent(transform);
-
+        cube.tag = "Wall";
         Vector3 tmpWidth = Vector3.one;
 
         if(Directions.horizontal == direction)
