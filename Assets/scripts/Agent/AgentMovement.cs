@@ -78,10 +78,8 @@ public class AgentMovement : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.CompareTag("Wall") || collision.transform.CompareTag("Agent"))
-        {
-    
+        {     
             moveDirection = DrawDirection();
-            Debug.Log(moveDirection);
         }
     }
 

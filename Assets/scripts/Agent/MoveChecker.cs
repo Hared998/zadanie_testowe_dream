@@ -24,7 +24,6 @@ public class MoveChecker : MonoBehaviour
     {
         if (other.transform.CompareTag("Wall") || other.transform.CompareTag("Agent"))
         {
-            Debug.Log("Wychodze" + direction);
             Active = false;
         }
     }

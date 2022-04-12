@@ -58,6 +58,7 @@ public class SpawnAgents : MonoBehaviour
         GameObject _agent = Instantiate(agent, transform.position, Quaternion.identity);
         _agent.GetComponent<AgentController>().SetSpawnAgent(this);
         _agent.transform.position = SpawnPoint;
+        _agent.name = "Agent " + Random.Range(1, 100000);
   
         currentAgents++;
         spawnState = SpawnState.CanSpawn;

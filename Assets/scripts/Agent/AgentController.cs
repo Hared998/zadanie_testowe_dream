@@ -7,8 +7,18 @@ public class AgentController : MonoBehaviour
     [SerializeField] 
     private int health;
     private SpawnAgents spawnAgent;
+    private AgentInfo agentInfo;
 
     // Start is called before the first frame update
+
+    public void Awake()
+    {
+        agentInfo = GameObject.Find("AgentInfo").GetComponent<AgentInfo>();
+    }
+    public int GetHealth()
+    {
+        return this.health;
+    }
 
     public void SetSpawnAgent(SpawnAgents spawnAgent)
     {
@@ -31,7 +41,9 @@ public class AgentController : MonoBehaviour
     {
         if(collision.transform.CompareTag("Agent"))
         {
+            
             collision.gameObject.GetComponent<AgentController>().GiveDamage();
+            agentInfo.UpdateInfo(health, gameObject.name);
         }
     }
 
