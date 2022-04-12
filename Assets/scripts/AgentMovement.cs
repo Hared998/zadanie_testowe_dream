@@ -8,7 +8,13 @@ public class AgentMovement : MonoBehaviour
     private float speed;
 
 
+    public List<int> moveDriections;
+
     private Rigidbody AgentRB;
+
+    public List<MoveChecker> checkers;
+
+    [SerializeField]
     private int moveDirection; // Kierunki: 0 - Forward | 1 - Backwards | 2 - Left, 3 - right
 
     // Start is called before the first frame update
@@ -19,40 +25,64 @@ public class AgentMovement : MonoBehaviour
     }
     void Start()
     {
+        UpdateCheckers();
         moveDirection = DrawDirection();
-        Debug.Log("MD: "+moveDirection);
     }
 
     // Update is called once per frame
+    
+    private void Update()
+    {
+    
+    }
     void FixedUpdate()
     {
-        AgentRB.MovePosition(transform.position + GetDirection()  * speed * Time.deltaTime);
-        
+        AgentRB.MovePosition(transform.position + GetDirection() * speed * Time.deltaTime);
     }
     public int DrawDirection()
     {
-        int _moveDirection = Random.Range(0, 3);
-        if (this.moveDirection != _moveDirection)
-            return _moveDirection;
-        return DrawDirection();
+        List<int> available = new List<int>();
+        foreach (var checker in checkers)
+        {
+            if (!checker.Active)
+            {
+                available.Add(checker.direction);
+            }
+        }
+        return available[Random.Range(0, available.Count)];
+    }
+    public void UpdateCheckers()
+    {
+        checkers.Clear();
+        foreach (var checker in gameObject.GetComponentsInChildren<MoveChecker>())
+        {
+            checkers.Add(checker);
+        }
     }
     public Vector3 GetDirection()
     {
         switch(this.moveDirection)
         {
             case 0:
-                return transform.forward;
-            case 1:
-                return -transform.forward;
-            case 2:
-                return -transform.right;
-            case 3:
                 return transform.right;
+            case 1:
+                return -transform.right;
+            case 2:
+                return -transform.forward;
+            case 3:
+                return transform.forward;
         }
         return Vector3.zero;
 
     }
-
-
+    private void OnCollisionEnter(Collision collider)
+    {
+        if (collider.transform.CompareTag("Wall") || collider.transform.CompareTag("Agent"))
+        {
+    
+            moveDirection = DrawDirection();
+            Debug.Log(moveDirection);
+        }
+    }
 
 }

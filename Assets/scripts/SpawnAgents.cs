@@ -59,7 +59,7 @@ public class SpawnAgents : MonoBehaviour
     IEnumerator SpawnTimer(Vector3 boardWidth)
     {
         int waitSeconds = Random.Range(minTimeForSpawn, maxTimerForSpawn);
-        Debug.Log(waitSeconds);
+       
         yield return new WaitForSeconds(waitSeconds);
 
         if (currentAgents >= maxAgents)

@@ -7,6 +7,7 @@ TagManager:
   - Board
   - Wall
   - Agent
+  - Checker
   layers:
   - Default
   - TransparentFX
