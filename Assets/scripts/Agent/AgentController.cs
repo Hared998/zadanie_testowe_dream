@@ -16,7 +16,7 @@ public class AgentController : MonoBehaviour
     }
     public void isDead()
     {
-        if (Health <= 0)
+        if (health <= 0)
         {
             spawnAgent.DestroyAgent();
             Destroy(gameObject);
@@ -24,7 +24,7 @@ public class AgentController : MonoBehaviour
     }
     public void GiveDamage()
     {
-        this.Health--;
+        this.health--;
         isDead();
     }
     private void OnCollisionEnter(Collision collision)
