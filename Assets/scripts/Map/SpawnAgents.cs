@@ -48,11 +48,17 @@ public class SpawnAgents : MonoBehaviour
         Vector3 coords = new Vector3(Random.Range(-boardWidth.x / 2, boardWidth.x / 2), offsetHeight, Random.Range(-boardWidth.z / 2, boardWidth.z / 2));
         return transform.position + coords;
     }
-    
+    public void DestroyAgent()
+    {
+        if(currentAgents >= 0)
+            currentAgents--;
+    }
     public void SetAgentOnBoard(Vector3 SpawnPoint) 
     {
         GameObject _agent = Instantiate(agent, transform.position, Quaternion.identity);
+        _agent.GetComponent<AgentController>().SetSpawnAgent(this);
         _agent.transform.position = SpawnPoint;
+  
         currentAgents++;
         spawnState = SpawnState.CanSpawn;
     }

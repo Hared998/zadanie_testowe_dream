@@ -75,9 +75,9 @@ public class AgentMovement : MonoBehaviour
         return Vector3.zero;
 
     }
-    private void OnCollisionEnter(Collision collider)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (collider.transform.CompareTag("Wall") || collider.transform.CompareTag("Agent"))
+        if (collision.transform.CompareTag("Wall") || collision.transform.CompareTag("Agent"))
         {
     
             moveDirection = DrawDirection();
