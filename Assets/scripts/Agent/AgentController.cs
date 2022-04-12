@@ -29,6 +29,7 @@ public class AgentController : MonoBehaviour
         if (health <= 0)
         {
             spawnAgent.DestroyAgent();
+            agentInfo.disableAgent();
             Destroy(gameObject);
         }
     }
@@ -41,7 +42,7 @@ public class AgentController : MonoBehaviour
     {
         if(collision.transform.CompareTag("Agent"))
         {
-            
+      
             collision.gameObject.GetComponent<AgentController>().GiveDamage();
             agentInfo.UpdateInfo(health, gameObject.name);
         }

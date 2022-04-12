@@ -23,8 +23,6 @@ public class Corner
 
 public class MapManager : MonoBehaviour
 {
-
-
     //Zmienne obs³guj¹ce mape
     public Vector3 offset = new Vector3(1, 0.5f, 1);
 
@@ -41,7 +39,7 @@ public class MapManager : MonoBehaviour
         corners = new List<Corner>();
     }
     void Start()
-    {
+    { 
         SetWallsAroundBoard();
         spawnAgents.StartSpawning();
     }
