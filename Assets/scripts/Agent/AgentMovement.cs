@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AgentMovement : MonoBehaviour
 {
+
+    public int changeRoadTimer;
     [SerializeField]
     private float speed;
 
@@ -27,6 +29,7 @@ public class AgentMovement : MonoBehaviour
     {
         UpdateCheckers();
         moveDirection = DrawDirection();
+        StartCoroutine(WaitSecondsAndChangeDirection());
     }
 
     // Update is called once per frame
@@ -49,7 +52,9 @@ public class AgentMovement : MonoBehaviour
                 available.Add(checker.direction);
             }
         }
-        return available[Random.Range(0, available.Count)];
+        if(available.Count > 0)
+            return available[Random.Range(0, available.Count)];
+        return -1;
     }
     public void UpdateCheckers()
     {
@@ -78,9 +83,19 @@ public class AgentMovement : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.CompareTag("Wall") || collision.transform.CompareTag("Agent"))
-        {     
-            moveDirection = DrawDirection();
+        {
+            if (DrawDirection() != -1)
+                moveDirection = DrawDirection();
+
         }
     }
+    IEnumerator WaitSecondsAndChangeDirection()
+    {
+
+        yield return new WaitForSeconds(changeRoadTimer);
+        moveDirection=DrawDirection();
+        StartCoroutine( WaitSecondsAndChangeDirection());
+    }
+    
 
 }
