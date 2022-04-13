@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Agent
   - Checker
+  - Cross
   layers:
   - Default
   - TransparentFX

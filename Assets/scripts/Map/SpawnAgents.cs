@@ -50,8 +50,13 @@ public class SpawnAgents : MonoBehaviour
     }
     public void DestroyAgent()
     {
-        if(currentAgents >= 0)
+
+        if (currentAgents >= 0)
+        {
+            Debug.Log(currentAgents + "odejmuje i jest: " +( currentAgents - 1));
             currentAgents--;
+        }
+    
     }
     public void SetAgentOnBoard(Vector3 SpawnPoint) 
     {

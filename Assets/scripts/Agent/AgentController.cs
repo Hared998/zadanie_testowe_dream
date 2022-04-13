@@ -9,10 +9,17 @@ public class AgentController : MonoBehaviour
     private SpawnAgents spawnAgent;
     private AgentInfo agentInfo;
 
+    [SerializeField]
+    private GameObject Cross;
     // Start is called before the first frame update
 
+    public GameObject GetCross()
+    {
+        return Cross;
+    }
     public void Awake()
     {
+        Cross.SetActive(false);
         agentInfo = GameObject.Find("AgentInfo").GetComponent<AgentInfo>();
     }
     public int GetHealth()

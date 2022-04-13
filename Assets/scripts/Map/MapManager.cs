@@ -40,6 +40,7 @@ public class MapManager : MonoBehaviour
     }
     void Start()
     { 
+        
         SetWallsAroundBoard();
         spawnAgents.StartSpawning();
     }
