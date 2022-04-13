@@ -53,7 +53,6 @@ public class SpawnAgents : MonoBehaviour
 
         if (currentAgents >= 0)
         {
-            Debug.Log(currentAgents + "odejmuje i jest: " +( currentAgents - 1));
             currentAgents--;
         }
     
